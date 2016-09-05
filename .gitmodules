@@ -1,0 +1,3 @@
+[submodule "dyngrid"]
+  path = assets/js/vendor/dyngrid
+  url = https://github.com/adfinitas-app/dyngrid
