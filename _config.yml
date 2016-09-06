@@ -18,3 +18,13 @@ collections:
     output: true
     permalink: /:collection/:title/
     _hide_content: true
+# Valeurs Frontmatter Cloudcannon
+type_modules:
+  - cta
+  - image
+  - formulaire
+types:
+  - fixe
+  - addition
+  - pourcentage
+  - libre
