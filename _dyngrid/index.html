@@ -1,3 +1,112 @@
 ---
+title: "Titre de la page"
+modules :
+ - type: cta
+   iraiser_cid: 53
+   iraiser_url: 'don.spa.asso.fr'
+   woopra_interaction: 'don-IMG_ete2015'
+   segments:
+     - nom: 'OPTIN'
+       type: fixe
+       arrondi_superieur: 0
+       valeurs:
+         - 20
+         - 30
+         - 50
+     - nom: 'ADHERENT'
+       type: addition
+       arrondi_superieur: 5
+       valeurs:
+         - 0
+         - 5
+         - 10
+     - nom: 'DONATEUR'
+       type: pourcentage
+       arrondi_superieur: 5
+       valeurs:
+         - 0
+         - 25
+         - 50
+     - nom: 'MIDDLE'
+       type: pourcentage
+       arrondi_superieur: 5
+       valeurs:
+         - 0
+         - 25
+         - 100
+     - nom: 'GD'
+       type: libre
+       arrondi_superieur: 5
+       valeurs:
+         - 0
+         - 25
+options:
+  meta:
+    title: "Titre de la page"
+    description: "Description de la page"
+  
 ---
 
+<div>
+  <h1>{{ page.options.meta.title }}</h1>
+</div>
+
+{% for module in page.modules %}
+  {% if module.type == "cta" %}
+  <div>
+    <a class="adFcta" data-cta="2" href="http://don.iraiser.eu">CALL TO Action 02</a>
+  </div>
+  {% elsif module.type == "image" %}
+    // TODO
+  {% elsif module.type == "form" %}
+    // TODO
+  {% endif %}
+{% endfor %}
+
+<script type="text/javascript">
+{% for module in page.modules %}
+  {% if module.type == "cta" %}
+    if (_DATA_CTA) {
+      alert("Vous ne pouvez pas déclarer deux fois le meme type de module");
+    }
+    var _DATA_CTA = {
+      iraiser_cid: {{ module.iraiser_cid }},
+      iraiser_url: '{{ module.iraiser_url }}',
+      woopra_interaction: '{{ module.woopra_interaction }}',
+      segments: {
+        {% for segment in module.segments %}
+        '{{ segment.nom }}': {
+          'arrondiSup': {{ segment.arrondi_superieur }},
+          'type': '{{ segment.type }}',
+          'values': [
+          {% for valeur in segment.valeurs %}
+            {{ valeur }}{% if forloop.last %}{% else %},{% endif %}
+          {% endfor %}
+          ]
+        }{% if forloop.last %}{% else %},{% endif %}
+        {% endfor %}
+      }
+    }
+  {% elsif module.type == "image" %}
+    // TODO
+  {% elsif module.type == "form" %}
+    // TODO
+  {% endif %}
+{% endfor %}
+</script>
+
+<script defer type="text/javascript">
+function whenAvailable(name, callback) {
+  var interval = 10; // ms
+  window.setTimeout(function() {
+    if (window[name]) {
+      callback(window[name]);
+    } else {
+      window.setTimeout(arguments.callee, interval);
+    }
+  }, interval);
+}
+whenAvailable("loadJQuery", function() {
+  loadJQuery('cta', true, 100, 'OPTIN');
+});
+</script>
