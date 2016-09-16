@@ -19,12 +19,20 @@ collections:
     permalink: /:collection/:title/
     _hide_content: true
 # Valeurs Frontmatter Cloudcannon
-type_modules:
-  - cta
-  - image
-  - formulaire
 types:
   - fixe
   - addition
   - pourcentage
   - libre
+# Configuration de iRaiser
+iraiser_cid: 53
+iraiser_url: 'don.spa.asso.fr'
+# Configuration de Woopra
+woopra_interaction: 'don-IMG_ete2015'
+# Configuration des segments
+noms:
+  - "OPTIN"
+  - "ADHERENT"
+  - "DONATEUR"
+  - "MIDDLE"
+  - "GD"
