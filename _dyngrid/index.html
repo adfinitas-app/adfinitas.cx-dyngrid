@@ -1,9 +1,21 @@
 ---
 title: "Titre de la page"
 header-segments:
-  - nom: 'OPTIN'
-    image_path: ""
-    title-html: ""
+  - nom_header: 'OPTIN'
+    image_path: "https://i.vimeocdn.com/portrait/58832_300x300"
+    title-html: "Ceci est un test - OPTIN"
+  - nom_header: 'ADHERENT'
+    image_path: "https://i.vimeocdn.com/portrait/58832_300x300"
+    title-html: "Ceci est un test - ADHERENT"
+  - nom_header: 'DONATEUR'
+    image_path: "https://i.vimeocdn.com/portrait/58832_300x300"
+    title-html: "Ceci est un test - DONATEUR"
+  - nom_header: 'MIDDLE'
+    image_path: "https://i.vimeocdn.com/portrait/58832_300x300"
+    title-html: "Ceci est un test - MIDDLE"
+  - nom_header: 'GD'
+    image_path: "https://i.vimeocdn.com/portrait/58832_300x300"
+    title-html: "Ceci est un test - GD"
 cta-segments:
  - nom: 'OPTIN'
    type: fixe
@@ -54,9 +66,26 @@ options:
 </div>
 
 {% if page.cta-segments != empty and page.cta-segments != nill %}
+<header>
+  <h1 class="custom-head-title">Loading..</h1>
+  <img class="custom-head-img" src="loading.."/>
+</header>
   <div>
-    <a class="adFcta" data-cta="2" href="http://don.iraiser.eu">CALL TO Action 02</a>
+    <a class="adFcta" data-cta="CTA" href="http://don.iraiser.eu">CALL TO Action 02</a>
   </div>
+{% endif %}
+
+{% if page.header-segments != empty and page.header-segments != nill %}
+<script type="text/javascript">
+var _DATA_CUSTOM_HEAD = {
+  {% for segment in page.header-segments %}
+  '{{ segment.nom_header }}': {
+    'txt': '{{ segment.title-html }}',
+    'img': '{{ segment.image_path }}'
+  }{% if forloop.last %}{% else %},{% endif %}
+  {% endfor %}
+}
+</script>
 {% endif %}
 
 {% if page.cta-segments != empty and page.cta-segments != nill %}
@@ -64,7 +93,7 @@ options:
   var _DATA_CTA = {
     iraiser_cid: {{ site.iraiser_cid }},
     iraiser_url: '{{ site.iraiser_url }}',
-    woopra_interaction: '{{ site.woopra_interaction }}',
+    woopra_interaction: document.href + ' {{ site.woopra_interaction }}',
     segments: {
       {% for segment in page.cta-segments %}
       '{{ segment.nom }}': {
@@ -94,6 +123,6 @@ function whenAvailable(name, callback) {
   }, interval);
 }
 whenAvailable("loadJQuery", function() {
-  loadJQuery('cta', true, 100, 'OPTIN');
+  loadJQuery('cta', false, 100, 'OPTIN');
 });
 </script>

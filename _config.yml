@@ -1,8 +1,5 @@
 array: []
 version: 3.2.1
-woopra_config:
-  domain: "adfinitas.fr"
-  cookie_domain: ".adfinitas.fr"
 defaults:
   - scope:
       path: ''
@@ -28,9 +25,19 @@ types:
 iraiser_cid: 53
 iraiser_url: 'don.spa.asso.fr'
 # Configuration de Woopra
+woopra_config:
+  domain: "adfinitas.fr"
+  cookie_domain: ".adfinitas.fr"
+# Configuration de l'interaction Woopra de dyngrid
 woopra_interaction: 'don-IMG_ete2015'
 # Configuration des segments
 noms:
+  - "OPTIN"
+  - "ADHERENT"
+  - "DONATEUR"
+  - "MIDDLE"
+  - "GD"
+nom_headers:
   - "OPTIN"
   - "ADHERENT"
   - "DONATEUR"
