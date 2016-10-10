@@ -1,6 +1,6 @@
 ---
 title: "Titre de la page"
-cid: 1
+iraiser_cid: 1
 header-segments:
   - nom_header: 'OPTIN'
     image_path: "https://i.vimeocdn.com/portrait/58832_300x300"
@@ -62,10 +62,10 @@ options:
   
 ---
 
-{% if page.cid == nill or page.cid == empty %}
-  {% assign cid = site.iraiser_cid %}
+{% if page.iraiser_cid == nill or page.iraiser_cid == empty %}
+  {% assign iraiser_cid = site.iraiser_cid %}
 {% else %}
-  {% assign cid = page.cid %}
+  {% assign iraiser_cid = page.iraiser_cid %}
 {% endif %}
 
 <div>
@@ -98,7 +98,7 @@ var _DATA_CUSTOM_HEAD = {
 {% if page.cta-segments != empty and page.cta-segments != nill %}
 <script type="text/javascript">
   var _DATA_CTA = {
-    iraiser_cid: {{ cid }},
+    iraiser_cid: {{ iraiser_cid }},
     iraiser_url: '{{ site.iraiser_url }}',
     woopra_interaction: document.href + ' {{ site.woopra_interaction }}',
     segments: {
